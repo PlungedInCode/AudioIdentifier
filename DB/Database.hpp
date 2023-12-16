@@ -3,12 +3,15 @@
 
 #include <sqlite3.h>
 
-#include <iostream>
-#include <stdexcept>
-#include <string>
 #include <unordered_map>
-#include <vector>
+#include <filesystem>
+#include <stdexcept>
 #include <optional>
+#include <iostream>
+#include <string>
+#include <vector>
+
+namespace fs = std::filesystem;
 
 class Song {
  public:
@@ -74,13 +77,15 @@ class DataBase {
       const std::vector<std::pair<std::string, int>>& HashValues,
       int64_t threshold = 5) const;
 
-  void ProcessHashValue(const std::pair<std::string, int>& hashValue,
-                          std::unordered_map<int, std::unordered_map<int, int>>& songMatches,
-                          std::unordered_map<int, int>& songMatchCounts) const;
-  
-  void FilterMatches(std::unordered_map<int, std::unordered_map<int, int>>& songMatches,
-                                  const std::unordered_map<int, int>& songMatchCounts,
-                                  int64_t threshold) const;
+  void ProcessHashValue(
+      const std::pair<std::string, int>& hashValue,
+      std::unordered_map<int, std::unordered_map<int, int>>& songMatches,
+      std::unordered_map<int, int>& songMatchCounts) const;
+
+  void FilterMatches(
+      std::unordered_map<int, std::unordered_map<int, int>>& songMatches,
+      const std::unordered_map<int, int>& songMatchCounts,
+      int64_t threshold) const;
 };
 
 #endif  // SHASHMAQAMFINDER_DATABASE_HPP_
