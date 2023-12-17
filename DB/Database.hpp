@@ -1,5 +1,5 @@
-#ifndef SHASHMAQAMFINDER_DATABASE_HPP_
-#define SHASHMAQAMFINDER_DATABASE_HPP_
+#ifndef DATABASE_HPP_
+#define DATABASE_HPP_
 
 #include <sqlite3.h>
 
@@ -97,4 +97,4 @@ class DataBase {
           processBatch) const;
 };
 
-#endif  // SHASHMAQAMFINDER_DATABASE_HPP_
+#endif  // DATABASE_HPP_
