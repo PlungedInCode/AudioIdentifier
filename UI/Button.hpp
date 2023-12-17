@@ -1,5 +1,5 @@
-#ifndef SHASHMAQAMFINDER_BUTTON_HPP_
-#define SHASHMAQAMFINDER_BUTTON_HPP_
+#ifndef BUTTON_HPP_
+#define BUTTON_HPP_
 
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/Drawable.hpp>
@@ -48,4 +48,4 @@ class Button : public sf::Drawable {
   sf::Clock clock_;
 };
 
-#endif  // SHASHMAQAMFINDER_BUTTON_HPP_
+#endif  // BUTTON_HPP_

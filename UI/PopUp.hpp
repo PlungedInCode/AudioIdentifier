@@ -1,5 +1,5 @@
-#ifndef SHASHMAQAMFINDER_POPUP_HPP_
-#define SHASHMAQAMFINDER_POPUP_HPP_
+#ifndef POPUP_HPP_
+#define POPUP_HPP_
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Transformable.hpp>
@@ -37,4 +37,4 @@ class PopUp : public sf::Drawable {
   void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 };
 
-#endif  // SHASHMAQAMFINDER_POPUP_HPP_
+#endif  // POPUP_HPP_
