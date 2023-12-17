@@ -1,9 +1,5 @@
-//
-// Created by Mikhmed Nabiev on 06.08.2023.
-//
-
-#ifndef SHASHMAQAMFINDER_MATH_UTILS_HPP_
-#define SHASHMAQAMFINDER_MATH_UTILS_HPP_
+#ifndef MATH_UTILS_HPP_
+#define MATH_UTILS_HPP_
 
 #pragma once
 #include <cstdint>
@@ -17,4 +13,4 @@ namespace constant {
   const int numOutputChannels = 0;
 }
 
-#endif //SHASHMAQAMFINDER_MATH_UTILS_HPP_
+#endif //MATH_UTILS_HPP_

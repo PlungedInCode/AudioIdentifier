@@ -1,5 +1,5 @@
-#ifndef SHASHMAQAM_FINDER_Math_FIELD_H_
-#define SHASHMAQAM_FINDER_Math_FIELD_H_
+#ifndef _Math_FIELD_H_
+#define _Math_FIELD_H_
 
 #pragma once
 #include <complex>
@@ -20,4 +20,4 @@ class Field {
 };
 
 
-#endif //SHASHMAQAM_FINDER_Math_FIELD_H_
+#endif //_Math_FIELD_H_

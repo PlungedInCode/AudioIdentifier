@@ -1,5 +1,5 @@
-#ifndef SHASHMAQAM_FINDER_Math_FASTFOURIERTRANSFORM_H_
-#define SHASHMAQAM_FINDER_Math_FASTFOURIERTRANSFORM_H_
+#ifndef _Math_FASTFOURIERTRANSFORM_H_
+#define _Math_FASTFOURIERTRANSFORM_H_
 
 #pragma once
 #include "Field.hpp"
@@ -27,4 +27,4 @@ class FFTConverter {
   vector<Field> roots_;
 };
 
-#endif //SHASHMAQAM_FINDER_Math_FASTFOURIERTRANSFORM_H_
+#endif //_Math_FASTFOURIERTRANSFORM_H_

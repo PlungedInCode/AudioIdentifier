@@ -1,8 +1,5 @@
-//
-// Created by Mikhmed Nabiev on 04.08.2023.
-//
-#ifndef SHASHMAQAMFINDER_MATH_SPECTOGRAM_HPP_
-#define SHASHMAQAMFINDER_MATH_SPECTOGRAM_HPP_
+#ifndef MATH_SPECTOGRAM_HPP_
+#define MATH_SPECTOGRAM_HPP_
 
 #pragma once
 #include "FastFourierTransform.hpp"
@@ -16,4 +13,4 @@ vector<vector<double>> GenerateSpectrogram(const vector<double>& samples,
                                            double stride_percent = 0.5,
                                            double window_ms = 20);
 
-#endif //SHASHMAQAMFINDER_MATH_SPECTOGRAM_HPP_
+#endif //MATH_SPECTOGRAM_HPP_
