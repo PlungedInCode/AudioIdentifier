@@ -1,17 +1,14 @@
-#ifndef SHASHMAQAMFINDER_UTILS_HPP_
-#define SHASHMAQAMFINDER_UTILS_HPP_
-
-#include "Math/Spectrogram.hpp"
-#include "DB/Database.hpp"
-#include "AudioModule/AudioConverter.hpp"
-#include "FingerPrint/FingerPrint.hpp"
-
 #include <filesystem>
-namespace fs = std::filesystem;
 
+#include "Database.hpp"
+#include "../Math/Spectrogram.hpp"
+#include "../FingerPrint/FingerPrint.hpp"
+#include "../AudioModule/AudioConverter.hpp"
 
-#define PROGRESS_BAR_WIDTH 50
+namespace Utils {
+    // Load all .wav file into db_
+    void LoadFolder(DataBase& db_, const std::filesystem::path& folder_path);
 
-void LoadFolder(DataBase& db_, const fs::path& folder_path);
-
-#endif  // SHASHMAQAMFINDER_UTILS_HPP_
+    // Recognize all .wav files in folder
+    void TestFolder(DataBase& db_, const std::filesystem::path& folder_path);
+}
