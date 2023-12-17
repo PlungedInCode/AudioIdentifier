@@ -1,7 +1,3 @@
-//
-// Created by Mikhmed Nabiev on 06.08.2023.
-//
-
 #ifndef MATH_UTILS_HPP_
 #define MATH_UTILS_HPP_
 
