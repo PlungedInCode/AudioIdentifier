@@ -1,5 +1,5 @@
-#ifndef SHASHMAQAMFINDER_FINGEEPRINT_HPP_
-#define SHASHMAQAMFINDER_FINGEEPRINT_HPP_
+#ifndef FINGEEPRINT_HPP_
+#define FINGEEPRINT_HPP_
 
 #include <openssl/sha.h>
 
@@ -13,4 +13,4 @@
 std::vector<std::pair<std::string, int>> GenerateFingerPrints(
     std::vector<std::vector<double>> &spectogram);
 
-#endif  // SHASHMAQAMFINDER_FINGEEPRINT_HPP_
+#endif  // FINGEEPRINT_HPP_
