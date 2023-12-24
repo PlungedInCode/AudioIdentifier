@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(Shashmaqam-Finder)
+project(AudioIdentifier)
 
 # Set C++ standard to C++20
 set(CMAKE_CXX_STANDARD 20)
@@ -10,7 +10,7 @@ include_directories(AudioModule Math DB FingerPrint UI)
 add_subdirectory(lib/SimpleLogger)
 
 # Add your source files
-add_executable(Shashmaqam-Finder
+add_executable(AudioIdentifier
     AudioModule/AudioConverter.cpp
     AudioModule/AudioExceptions.cpp
     AudioModule/AudioRecorder.cpp
@@ -26,4 +26,4 @@ add_executable(Shashmaqam-Finder
 )
 
 # Link libraries
-target_link_libraries(Shashmaqam-Finder SimpleLogger portaudio ssl crypto tag sqlite3 sfml-graphics sfml-window sfml-system)
+target_link_libraries(AudioIdentifier SimpleLogger portaudio ssl crypto tag sqlite3 sfml-graphics sfml-window sfml-system)
