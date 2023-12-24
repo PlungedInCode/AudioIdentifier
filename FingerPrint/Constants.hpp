@@ -1,5 +1,5 @@
-#ifndef MATH_UTILS_HPP_
-#define MATH_UTILS_HPP_
+#ifndef FINGERPRINT_CONSTANTS_HPP_
+#define FINGERPRINT_CONSTANTS_HPP_
 
 #pragma once
 #include <cstdint>
@@ -13,4 +13,4 @@ namespace FingerPrintConstants {
   constexpr int64_t RADIUS = 10;
 }
 
-#endif //MATH_UTILS_HPP_
+#endif //FINGERPRINT_CONSTANTS_HPP_
