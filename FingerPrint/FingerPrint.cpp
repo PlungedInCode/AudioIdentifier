@@ -106,6 +106,7 @@ std::vector<double> Flatten(const std::vector<std::vector<double>>& matrix,
   return flatted;
 }
 
+// TODO: Optimize
 double LocalMaximum(const std::vector<double>& arr, const size_t idx) {
   double maximum = arr[idx];
   for (int i = -RADIUS; i <= RADIUS; i++) {
@@ -144,7 +145,7 @@ std::vector<std::pair<int, int>> GetFLattedPeaks(
   auto flatten_peaks_tranposed =
       Get1DPeaks(Flatten(spectrogram, true), n, m, true);
 
-  std::vector<std::pair<int, int>> peaks;
+  std::vector<std::pair<int, int>> peaks = {{0, 0}};
   for (size_t i = 0; i < n; ++i) {
     for (size_t j = 0; j < m; ++j) {
       if (flatten_peaks[i][j] && flatten_peaks_tranposed[i][j]) {
@@ -157,8 +158,8 @@ std::vector<std::pair<int, int>> GetFLattedPeaks(
 
 std::vector<std::pair<std::string, int>> GenerateFingerPrints(
     std::vector<std::vector<double>>& spectogram) {
-  std::vector<std::pair<int, int>> peaks = GetPeaks(spectogram);
-  // std::vector<std::pair<int, int>> peaks = GetFLattedPeaks(spectogram);
+  // std::vector<std::pair<int, int>> peaks = GetPeaks(spectogram);
+  std::vector<std::pair<int, int>> peaks = GetFLattedPeaks(spectogram);
   std::vector<std::pair<std::string, int>> hashes = GenerateHashes(peaks);
   return hashes;
 }
