@@ -81,7 +81,9 @@ void Recognize(DataBase& db_, const fs::path& file_path) {
   AudioConverter convertor(file_path.string());
   auto spectogram = GenerateSpectrogram(convertor.GetData());
   auto finger_prints = GenerateFingerPrints(spectogram);
-  // std::cout << << std::endl;
+
+  std::cout << finger_prints.size() << std::endl;
+
   LOG_TRACE("\t\t\tStatistic\n\t\t\t\t\tArtist\tTitle\tScore");
   std::optional<Song> song = db_.getBestMatch(finger_prints);
   std::optional<Song> rSong = Song(file_path.filename().string(), -1);

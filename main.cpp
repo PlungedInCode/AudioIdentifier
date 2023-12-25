@@ -11,17 +11,18 @@ int main() {
   Logger::DisableFileStamp();
   Logger::SetStream(OutputStream::kBoth);
   Logger::SetLogFile("20Songs.txt");
-  // std::string DBTEST_folderPath = "music/DBTEST";
-  // std::string Fulls_folderPath = "../music/Fulls";
+  std::string DBTEST_folderPath = "../music/FullsTEST";
+  std::string Fulls_folderPath = "../music/Fulls";
   std::string Samples_folderPath = "../music/Samples";
-  // std::string SamplesTest_folderPath = "../music/SamplesTEST";
+  std::string SamplesTest_folderPath = "../music/SamplesTEST";
 
-  DataBase db("20SongsCP.db");
+  DataBase db("FLATTEDPEAKS.db");
 
   try {
+    // LoadFolder(db, DBTEST_folderPath);
     // LoadFolder(db, Fulls_folderPath);
-    TestFolder(db, Samples_folderPath);
-    // TestFolder(db, SamplesTest_folderPath);
+    // TestFolder(db, Samples_folderPath);
+    TestFolder(db, SamplesTest_folderPath);
   } catch (const std::exception& e) {
     std::cerr << "Error: " << e.what() << std::endl;
     return 1;

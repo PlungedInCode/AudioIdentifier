@@ -78,7 +78,7 @@ std::vector<std::pair<int, int>> GetPeaks(
     }
   }
 
-  for (int64_t y = 0; y < height - 1; y++) {
+  for (int64_t y = 0; y < height; y++) {
     for (int64_t x = 0; x < width; x++) {
       if (spectrogram_copy[y][x] == spectrogram[y][x]) {
         peaks.push_back(std::make_pair(x, y));
@@ -88,9 +88,77 @@ std::vector<std::pair<int, int>> GetPeaks(
   return peaks;
 }
 
+std::vector<double> Flatten(const std::vector<std::vector<double>>& matrix,
+                            bool transpose = false) {
+  size_t n = matrix.size(),
+         m = matrix[0].size();  // TODO: UB - be careful for mateix[0]
+  std::vector<double> flatted(n * m);
+  size_t idx = 0;
+  for (size_t i = 0; i < n; ++i) {
+    for (size_t j = 0; j < m; ++j) {
+      if (transpose) {
+        flatted[idx++] = matrix[j][i];
+      } else {
+        flatted[idx++] = matrix[i][j];
+      }
+    }
+  }
+  return flatted;
+}
+
+double LocalMaximum(const std::vector<double>& arr, const size_t idx) {
+  double maximum = arr[idx];
+  for (int i = -RADIUS; i <= RADIUS; i++) {
+    if ((i + idx) >= 0 && (i + idx) < arr.size()) {
+      maximum = std::max(maximum, arr[i]);
+    }
+  }
+  return maximum;
+}
+
+std::vector<std::vector<bool>> Get1DPeaks(const std::vector<double>& arr,
+                                          const size_t n, const size_t m,
+                                          bool transpose = false) {
+  std::vector<std::vector<bool>> mask(n, std::vector<bool>(m, 0));
+  std::vector<double> filtred_arr(arr.size());
+  for (size_t i = 0; i < arr.size(); i++) {
+    filtred_arr[i] = LocalMaximum(arr, i);
+  }
+  for (size_t k = 0; k < arr.size(); k++) {
+    if (filtred_arr[k] == arr[k]) {
+      size_t i = k / n;
+      size_t j = k % m;
+      if (transpose) {
+        std::swap(i, j);
+      }
+      mask[i][j] = true;
+    }
+  }
+  return mask;
+}
+
+std::vector<std::pair<int, int>> GetFLattedPeaks(
+    const std::vector<std::vector<double>>& spectrogram) {
+  size_t n = spectrogram.size(), m = spectrogram[0].size();
+  auto flatten_peaks = Get1DPeaks(Flatten(spectrogram), n, m);
+  auto flatten_peaks_tranposed =
+      Get1DPeaks(Flatten(spectrogram, true), n, m, true);
+
+  std::vector<std::pair<int, int>> peaks;
+  for (size_t i = 0; i < n; ++i) {
+    for (size_t j = 0; j < m; ++j) {
+      if (flatten_peaks[i][j] && flatten_peaks_tranposed[i][j]) {
+        peaks.emplace_back(i, j);
+      }
+    }
+  }
+  return peaks;
+}
+
 std::vector<std::pair<std::string, int>> GenerateFingerPrints(
     std::vector<std::vector<double>>& spectogram) {
   std::vector<std::pair<int, int>> peaks = GetPeaks(spectogram);
+  // std::vector<std::pair<int, int>> peaks = GetFLattedPeaks(spectogram);
   std::vector<std::pair<std::string, int>> hashes = GenerateHashes(peaks);
   return hashes;
 }
