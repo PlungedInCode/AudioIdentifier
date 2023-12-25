@@ -11,20 +11,24 @@ int main() {
   Logger::DisableFileStamp();
   Logger::SetStream(OutputStream::kBoth);
   Logger::SetLogFile("20Songs.txt");
-  std::string DBTEST_folderPath = "../music/FullsTEST";
+  std::string DBTEST_folderPath = "../music/TestFulls";
+  std::string SamplesTest_folderPath = "../music/TestSamples";
   std::string Fulls_folderPath = "../music/Fulls";
   std::string Samples_folderPath = "../music/Samples";
-  std::string SamplesTest_folderPath = "../music/SamplesTEST";
 
-  DataBase db("FLATTEDPEAKS.db");
+  // DataBase db("FLATTEDPEAKS.db");
+  // DataBase db("MINMAXFPEAKS.db");
+  DataBase db("FLATTEDPEAKSTEST.db");
+  // DataBase db("MINMAXFPEAKSTEST.db");
 
   try {
-    // LoadFolder(db, DBTEST_folderPath);
     // LoadFolder(db, Fulls_folderPath);
     // TestFolder(db, Samples_folderPath);
+
+    LoadFolder(db, DBTEST_folderPath);
     TestFolder(db, SamplesTest_folderPath);
   } catch (const std::exception& e) {
-    std::cerr << "Error: " << e.what() << std::endl;
+    LOG_ERROR("Error: ", e.what());
     return 1;
   }
 
