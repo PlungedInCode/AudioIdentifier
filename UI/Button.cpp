@@ -22,7 +22,7 @@ Button::Button(float x, float y, float radius)
 
   font_ = std::make_unique<sf::Font>();
   if (!font_->loadFromFile(FONT_PATH)) {
-    std::cout << "Couldn't load font\n";
+    LOG_ERROR("Failed to load font");
   }
 
   label_.setFont(*font_.get());

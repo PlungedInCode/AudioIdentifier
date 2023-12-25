@@ -2,29 +2,28 @@
 
 #include <iostream>
 
-ShazamUI::ShazamUI(int width, int height) {
+AudioIdentifier::AudioIdentifier(int width, int height) {
   InitWindow(width, height);
   InitFont();
   InitUI();
 }
 
-void ShazamUI::InitWindow(int width, int height) {
-  window_.create(sf::VideoMode(400, 700), "ShazamUI", sf::Style::Close);
+void AudioIdentifier::InitWindow(int width, int height) {
+  window_.create(sf::VideoMode(400, 700), "AudioIdentifier", sf::Style::Close);
 
 }
 
-void ShazamUI::InitFont() {
-  std::cout << window_.isOpen() << '\n';
+void AudioIdentifier::InitFont() {
   font_ = std::make_unique<sf::Font>();
   if (font_->loadFromFile(FONT_PATH)) {
-    std::cout << "Font loaded\n";
+    LOG_TRACE("Font loaded");
   } else {
-    std::cerr << "Failed to load font\n";
+    LOG_ERROR("Failed to load font");
     window_.close();
   }
 }
 
-void ShazamUI::InitUI() {
+void AudioIdentifier::InitUI() {
   label_.setFont(*font_.get());
   label_.setString("Music Finder");
   label_.setFillColor(sf::Color::Black);
@@ -37,7 +36,7 @@ void ShazamUI::InitUI() {
                                     window_.getSize().y / 2, 100.f);
 }
 
-void ShazamUI::Run() {
+void AudioIdentifier::Run() {
   while (window_.isOpen()) {
     HandleEvents();
     Update();
@@ -45,7 +44,7 @@ void ShazamUI::Run() {
   }
 }
 
-void ShazamUI::HandleEvents() {
+void AudioIdentifier::HandleEvents() {
   sf::Event event;
   while (window_.pollEvent(event)) {
     if (event.type == sf::Event::Closed) {
@@ -56,7 +55,7 @@ void ShazamUI::HandleEvents() {
   }
 }
 
-void ShazamUI::HandleKeyPress(sf::Keyboard::Key key) {
+void AudioIdentifier::HandleKeyPress(sf::Keyboard::Key key) {
   switch (key) {
     case sf::Keyboard::Enter:
       HandleEnterKeyPress();
@@ -69,21 +68,21 @@ void ShazamUI::HandleKeyPress(sf::Keyboard::Key key) {
   }
 }
 
-void ShazamUI::HandleEnterKeyPress() {
+void AudioIdentifier::HandleEnterKeyPress() {
   // if (!recorder.IsRecording()) {
     shape_->ChangeState();
     recording_ = true;
   // }
 }
 
-void ShazamUI::Update() {
+void AudioIdentifier::Update() {
   shape_->Update();
   // if (recording) {
   //   handleRecording();
   // }
 }
 
-void ShazamUI::HandleRecording() {
+void AudioIdentifier::HandleRecording() {
   // recorder.StartRecording(1);
   // std::pair<std::string, std::string> matches = GetMatches(recorder.GetData());
   data_->SetData("Unknow", "Unknown");
@@ -92,7 +91,7 @@ void ShazamUI::HandleRecording() {
   data_->ChangeState();
 }
 
-void ShazamUI::Render() {
+void AudioIdentifier::Render() {
   window_.clear(sf::Color::White);
   window_.draw(*shape_);
   window_.draw(label_);

@@ -6,9 +6,9 @@
 #include "PopUp.hpp"
 #include "Logger.hpp"
 
-class ShazamUI {
+class AudioIdentifier {
 public:
-    ShazamUI(int width = 400, int height = 700);
+    AudioIdentifier(int width = 400, int height = 700);
     void Run();
 
 private:
