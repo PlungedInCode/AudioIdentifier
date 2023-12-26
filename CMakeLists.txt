@@ -26,4 +26,4 @@ add_executable(AudioIdentifier
 )
 
 # Link libraries
-target_link_libraries(AudioIdentifier SimpleLogger portaudio ssl crypto tag sqlite3 sfml-graphics sfml-window sfml-system)
+target_link_libraries(AudioIdentifier SimpleLogger portaudio ssl crypto tag sqlite3 sfml-graphics sfml-window sfml-system sfml-audio)
