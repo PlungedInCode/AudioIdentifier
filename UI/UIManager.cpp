@@ -4,7 +4,11 @@
 
 using namespace ui_constants;
 
-AudioIdentifier::AudioIdentifier(int width, int height) {
+#define FILENAME "RecordedData.wav"
+#define DBNAME "Database.db"
+#define RECORD_DURATION 10
+
+AudioIdentifier::AudioIdentifier(int width, int height) : recording_(false), db_(DBNAME) {
   LOG_INFO("Runnig UI");
   InitWindow(width, height);
   LOG_INFO("Window initialized");
@@ -79,27 +83,58 @@ void AudioIdentifier::HandleKeyPress(sf::Keyboard::Key key) {
 }
 
 void AudioIdentifier::HandleEnterKeyPress() {
-  // if (!recorder.IsRecording()) {
-  shape_->ChangeState();
-  recording_ = true;
-  LOG_INFO("Recording started.");
-  // }
+  if (!recording_) {
+    shape_->ChangeState();
+    recorder_.start();
+    timer_.restart();
+    recording_ = true;
+    LOG_INFO("Recording started.");
+  }
 }
 
 void AudioIdentifier::Update() {
   shape_->Update();
-  // if (recording) {
-  //   handleRecording();
-  // }
+  if (recording_ && timer_.getElapsedTime().asSeconds() > RECORD_DURATION) {
+    FinishRecording();
+    HandleRecordedData();
+  }
 }
 
-void AudioIdentifier::HandleRecording() {
-  // recorder.StartRecording(1);
-  // std::pair<std::string, std::string> matches =
-  // GetMatches(recorder.GetData());
-  data_->SetData("Unknow", "Unknown");
-  // recording = false;
+void AudioIdentifier::FinishRecording() {
+  recorder_.stop();
+  recording_ = false;
+  LOG_INFO("Done recording.");
+  // Get the recorded sound buffer
+  const sf::SoundBuffer& buffer = recorder_.getBuffer();
+
+  // Save the recorded audio to a WAV file
+  if (buffer.saveToFile(FILENAME)) {
+      std::cout << "Audio recorded and saved successfully." << std::endl;
+  } else {
+      std::cerr << "Failed to save recorded audio." << std::endl;
+  }
   shape_->ChangeState();
+}
+
+void AudioIdentifier::HandleRecordedData() {
+  LOG_INFO("HandleRecordedData:");
+  AudioConverter converter(FILENAME);
+  LOG_INFO("Converted:");
+  auto spectrogram = GenerateSpectrogram(converter.GetData());
+  LOG_INFO("Generated Spectrogram:");
+  auto hashes = GenerateFingerPrints(spectrogram);
+  LOG_INFO("Generated hashes:");
+  auto match = db_.getBestMatch(hashes);
+  std::string artist = "Unknown artist";
+  std::string title = "Unknown";
+  if (match != std::nullopt) {
+    artist = match->getArtist();
+    title = match->getTitle();
+    LOG_INFO("Best Match :", artist, title);
+  } else {
+    LOG_WARNING("No match found");
+  }
+  data_->SetData(artist, title);
   data_->ChangeState();
 }
 
