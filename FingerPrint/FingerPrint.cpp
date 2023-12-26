@@ -4,6 +4,12 @@ using namespace FingerPrintConstants;
 
 bool PeakSortEn = true;
 
+bool compare(const std::pair<int, int>& lhs, const std::pair<int, int>& rhs) {
+  int lhs_size = lhs.first * lhs.first + lhs.second * lhs.second;
+  int rhs_size = rhs.first * rhs.first + rhs.second * rhs.second;
+  return lhs_size <= rhs_size;
+}
+
 std::string CalculateSHA1(const std::string& input) {
   unsigned char hash[FINGERPRINT_REDUCTION];
   SHA1(reinterpret_cast<const unsigned char*>(input.c_str()), input.length(),
@@ -23,6 +29,7 @@ std::vector<std::pair<std::string, int>> GenerateHashes(
   // Sort peaks by time if PeakSort is enabled (enabling may improve performance
   // but accuracy will be damaged)
   if (PeakSortEn) {
+    // std::sort(peaks.begin(), peaks.end(), compare);
     std::sort(peaks.begin(), peaks.end(), [](const auto& lhs, const auto& rhs) {
       return lhs.second < rhs.second;
     });
@@ -158,8 +165,8 @@ std::vector<std::pair<int, int>> GetFLattedPeaks(
 
 std::vector<std::pair<std::string, int>> GenerateFingerPrints(
     std::vector<std::vector<double>>& spectogram) {
-  // std::vector<std::pair<int, int>> peaks = GetPeaks(spectogram);
-  std::vector<std::pair<int, int>> peaks = GetFLattedPeaks(spectogram);
+  std::vector<std::pair<int, int>> peaks = GetPeaks(spectogram);
+  // std::vector<std::pair<int, int>> peaks = GetFLattedPeaks(spectogram);
   std::vector<std::pair<std::string, int>> hashes = GenerateHashes(peaks);
   return hashes;
 }
