@@ -134,7 +134,7 @@ void AudioIdentifier::HandleRecordedData() {
   } else {
     LOG_WARNING("No match found");
   }
-  data_->SetData(artist, title);
+  data_->SetData(title, artist);
   data_->ChangeState();
 }
 
