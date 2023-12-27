@@ -1,8 +1,8 @@
 #ifndef _UI_CONSTANTS_HPP
 #define _UI_CONSTANTS_HPP
 
-#define MAIN_WINDOW_NAME "Shashmaqam-Finder"
-#define APP_NAME "Shashmaqam-Finder"
+#define MAIN_WINDOW_NAME "AudioIdentifier"
+#define APP_NAME "AudioIdentifier"
 
 namespace ui_constants {
     float kButtonRadius = 100;

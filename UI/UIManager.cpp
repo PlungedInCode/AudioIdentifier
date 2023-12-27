@@ -125,7 +125,7 @@ void AudioIdentifier::HandleRecordedData() {
   auto hashes = GenerateFingerPrints(spectrogram);
   LOG_INFO("Generated hashes:");
   auto match = db_.getBestMatch(hashes);
-  std::string artist = "Unknown artist";
+  std::string artist = "Unknown";
   std::string title = "Unknown";
   if (match != std::nullopt) {
     artist = match->getArtist();
