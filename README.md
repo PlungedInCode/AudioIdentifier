@@ -22,7 +22,7 @@ AudioIdentifier is a C++ application designed for audio fingerprinting and recog
 - PortAudio
 - Cmake
 ## Screenshots
-![UI](/images/UI.png)
+![UI](/images/UIImage.png)
 
 ## Setup
 1.  **Clone the Repository:**
