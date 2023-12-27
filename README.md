@@ -1,7 +1,6 @@
 
 #   AudioIdentifier
 > An algorithm for recognizing and fingerprinting audio files, implemented in C++.
-<!-- > Demo [_here_](https://www.example.com)-->
 
 ## Table of Contents
 * [General Info](#general-information)
