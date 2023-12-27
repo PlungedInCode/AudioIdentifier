@@ -113,7 +113,7 @@ void AudioIdentifier::FinishRecording() {
   } else {
       std::cerr << "Failed to save recorded audio." << std::endl;
   }
-  shape_->ChangeState();
+  // shape_->ChangeState();
 }
 
 void AudioIdentifier::HandleRecordedData() {
